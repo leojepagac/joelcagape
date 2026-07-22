@@ -25,8 +25,8 @@ export const Route = createFileRoute("/")({
         content:
           "Joel Cagape is an experienced IT professional specializing in enterprise infrastructure, cybersecurity, and workflow automation. 10+ years securing and modernizing IT operations.",
       },
-      { property: "og:title", content: "Joel Cagape — Secure, Reliable, Automated IT Solutions" },
-      { property: "og:description", content: "IT Infrastructure • Cybersecurity • Workflow Automation" },
+      { property: "og:title", content: "Joel Cagape — IT Infrastructure, Cybersecurity & Automation" },
+      { property: "og:description", content: "Joel Cagape is an experienced IT professional specializing in enterprise infrastructure, cybersecurity, and workflow automation. 10+ years securing and modernizing IT operations." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
