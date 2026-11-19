@@ -1,3 +1,4 @@
+
 import { createFileRoute } from "@tanstack/react-router";
 import { motion, useScroll, useSpring, useInView, animate } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
@@ -64,12 +65,14 @@ function Counter({ value, suffix = "" }: { value: number; suffix?: string }) {
 function Nav() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+
   useEffect(() => {
     const on = () => setScrolled(window.scrollY > 20);
     on();
     window.addEventListener("scroll", on);
     return () => window.removeEventListener("scroll", on);
   }, []);
+
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
@@ -89,10 +92,11 @@ function Nav() {
             <div className="leading-tight">
               <div className="font-display text-sm font-semibold tracking-tight">Joel Cagape</div>
               <div className="text-[10px] uppercase tracking-widest text-muted-foreground">
-                IT · Security · Automation
+                Automation · IT · Security
               </div>
             </div>
           </a>
+
           <nav className="hidden md:flex items-center gap-1">
             {nav.map((n) => (
               <a
@@ -104,6 +108,7 @@ function Nav() {
               </a>
             ))}
           </nav>
+
           <div className="hidden md:flex items-center gap-2">
             <a
               href="#contact"
@@ -112,39 +117,44 @@ function Nav() {
               Let's Talk <ArrowRight className="h-3.5 w-3.5" />
             </a>
           </div>
+
           <button
             onClick={() => setOpen((o) => !o)}
             className="md:hidden rounded-lg p-2 hover:bg-white/5"
             aria-label="Toggle menu"
+            aria-expanded={open}
           >
             {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
         </div>
+
         {open && (
           <motion.div
             initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
-            className="glass-strong mt-2 rounded-2xl p-3 md:hidden"
+            transition={{ duration: 0.2 }}
+            className="md:hidden mt-2 rounded-2xl glass-strong p-3"
           >
-            <div className="grid gap-1">
+            <nav className="flex flex-col gap-1">
               {nav.map((n) => (
                 <a
                   key={n.href}
                   href={n.href}
                   onClick={() => setOpen(false)}
-                  className="rounded-lg px-3 py-2 text-sm text-muted-foreground hover:bg-white/5 hover:text-foreground"
+                  className="rounded-lg px-3 py-2 text-sm text-muted-foreground transition-colors hover:text-foreground hover:bg-white/5"
                 >
                   {n.label}
                 </a>
               ))}
+
               <a
                 href="#contact"
                 onClick={() => setOpen(false)}
-                className="mt-1 inline-flex items-center justify-center gap-1.5 rounded-lg bg-[image:var(--gradient-primary)] px-4 py-2 text-sm font-medium text-primary-foreground"
+                className="mt-2 inline-flex items-center justify-center gap-1.5 rounded-lg bg-[image:var(--gradient-primary)] px-4 py-2 text-sm font-medium text-primary-foreground"
               >
-                Let's Talk
+                Let's Talk <ArrowRight className="h-3.5 w-3.5" />
               </a>
-            </div>
+            </nav>
           </motion.div>
         )}
       </div>
@@ -212,55 +222,73 @@ function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="mx-auto max-w-4xl text-center"
+          className="mx-auto max-w-6xl"
         >
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full glass px-4 py-1.5 text-xs sm:text-sm text-muted-foreground">
-            <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
-            </span>
-            Available for consulting & automation projects
-          </div>
+          <div className="grid items-center gap-10 md:grid-cols-[280px_1fr] lg:gap-14">
 
-          <h1 className="font-display text-4xl sm:text-6xl md:text-7xl font-bold leading-[1.05] tracking-tight">
-            Building <span className="text-gradient">Secure, Reliable</span>
-            <br className="hidden sm:block" /> and <span className="text-gradient">Automated</span> IT Solutions.
-          </h1>
+            
+{/* Profile Picture */}
+<div className="flex justify-center">
+  <div className="relative h-72 w-72 sm:h-80 sm:w-80 lg:h-96 lg:w-96">
+    <img
+      src="/joel-profile.jpg"
+      alt="Joel Cagape"
+      className="h-full w-full rounded-full object-cover shadow-2xl"
+    />
+  </div>
+</div>
 
-          <p className="mx-auto mt-6 max-w-2xl text-base sm:text-lg text-muted-foreground">
-            I help businesses improve productivity, strengthen security, and modernize their
-            IT operations through enterprise networking, cybersecurity, workflow automation,
-            and AI-powered business solutions.
-          </p>
 
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-            <a
-              href="#projects"
-              className="group inline-flex items-center gap-2 rounded-xl bg-[image:var(--gradient-primary)] px-5 py-3 text-sm font-medium text-primary-foreground shadow-[var(--shadow-glow)] transition-transform hover:scale-[1.03]"
-            >
-              View My Projects
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-            </a>
-            <a
-              href="#contact"
-              className="glass inline-flex items-center gap-2 rounded-xl px-5 py-3 text-sm font-medium text-foreground transition-colors hover:bg-white/10"
-            >
-              <Download className="h-4 w-4" />
-              Download Resume
-            </a>
-            <a
-              href="#contact"
-              className="inline-flex items-center gap-2 rounded-xl px-5 py-3 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-            >
-              Contact Me
-              <ArrowRight className="h-3.5 w-3.5" />
-            </a>
+            {/* Hero Content */}
+            <div className="text-center md:text-left">
+              <div className="mb-6 inline-flex items-center gap-2 rounded-full glass px-4 py-1.5 text-xs sm:text-sm text-muted-foreground">
+                <span className="relative flex h-2 w-2">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
+                </span>
+                Available for consulting & automation projects
+              </div>
+
+              <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.05] tracking-tight">
+                <span className="text-gradient">Building Intelligent Automation,</span>
+                <br />
+                Secure & Reliable IT Solutions.
+              </h1>
+
+              <p className="mt-6 text-base sm:text-lg text-muted-foreground">
+                I help businesses streamline operations, automate workflows, and generate more leads through n8n-powered automation, GoHighLevel CRM, and AI-driven business solutions. I also bring expertise in enterprise IT infrastructure, networking, and cybersecurity to build secure, efficient, and scalable systems.
+              </p>
+
+              <div className="mt-8 flex flex-wrap items-center justify-center gap-3 md:justify-start">
+                <a
+                  href="#projects"
+                  className="group inline-flex items-center gap-2 rounded-xl bg-[image:var(--gradient-primary)] px-5 py-3 text-sm font-medium text-primary-foreground shadow-[var(--shadow-glow)] transition-transform hover:scale-[1.03]"
+                >
+                  View My Projects
+                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                </a>
+                <a
+                  href="#contact"
+                  className="glass inline-flex items-center gap-2 rounded-xl px-5 py-3 text-sm font-medium text-foreground transition-colors hover:bg-white/10"
+                >
+                  <Download className="h-4 w-4" />
+                  Download Resume
+                </a>
+                <a
+                  href="#contact"
+                  className="inline-flex items-center gap-2 rounded-xl px-5 py-3 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+                >
+                  Contact Me
+                  <ArrowRight className="h-3.5 w-3.5" />
+                </a>
+              </div>
+            </div>
           </div>
 
           {/* Stats */}
           <div className="mx-auto mt-16 grid max-w-3xl grid-cols-2 gap-3 sm:grid-cols-4">
             {[
-              { v: 10, s: "+", l: "Years Experience" },
+              { v: 12, s: "+", l: "Years Experience" },
               { v: 50, s: "+", l: "Projects Delivered" },
               { v: 15, s: "+", l: "Branches Supported" },
               { v: 99, s: "%", l: "Uptime Focus" },
@@ -270,7 +298,7 @@ function Hero() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 + i * 0.08 }}
-                className="glass rounded-2xl p-4"
+                className="glass rounded-2xl p-4 text-center"
               >
                 <div className="font-display text-2xl sm:text-3xl font-bold text-gradient">
                   <Counter value={s.v} suffix={s.s} />
@@ -292,7 +320,7 @@ function About() {
     <Section
       id="about"
       eyebrow="About"
-      title="A decade of IT built for business outcomes."
+      title="12+ Years of IT Expertise, Now Driving Business Automation."
     >
       <div className="grid gap-8 md:grid-cols-5">
         <motion.div
@@ -303,22 +331,18 @@ function About() {
           className="md:col-span-3 space-y-4 text-muted-foreground leading-relaxed"
         >
           <p>
-            I'm an experienced IT professional with more than <span className="text-foreground font-medium">10 years</span> of experience supporting
-            enterprise IT infrastructure, network administration, cybersecurity, technical support,
-            and workflow automation.
+            I'm an IT and Automation professional with <span className="text-foreground font-medium">12 years</span> of experience focused on helping businesses streamline operations, eliminate repetitive tasks, and improve productivity through workflow automation and AI-powered solutions.
           </p>
           <p>
-            Throughout my career, I've helped improve business operations by designing secure
-            network infrastructures, deploying enterprise firewall solutions, automating repetitive
-            workflows, and supporting mission-critical systems across multiple dealership branches.
+            I specialize in building automated workflows using n8n, integrating APIs and business applications, and leveraging GoHighLevel (GHL) for CRM automation, lead management, and business process optimization.
+            Throughout my career, I've also gained extensive experience in enterprise IT infrastructure, network administration, and cybersecurity. I've designed and maintained secure network environments, deployed enterprise firewall solutions, and supported mission-critical systems across multiple dealership branches.
           </p>
           <p>
             I enjoy combining technology, security, and automation to create practical solutions
             that reduce manual work and improve operational efficiency.
           </p>
           <p>
-            I'm passionate about continuous learning in cybersecurity, cloud technologies, APIs,
-            AI tools, and workflow automation.
+            I'm passionate about continuously expanding my knowledge in AI automation, n8n, GoHighLevel, API integrations, cloud technologies, and cybersecurity.
           </p>
         </motion.div>
 
@@ -362,7 +386,7 @@ function Services() {
       id="services"
       eyebrow="What I Do"
       title="Four disciplines. One dependable stack."
-      subtitle="End-to-end capabilities across infrastructure, security, automation, and support."
+      subtitle="End-to-end solutions focused on workflow automation, AI integration, business process optimization, IT infrastructure, and cybersecurity."
     >
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {services.map((s, i) => {
@@ -438,6 +462,7 @@ function Projects() {
   const cats = ["All", "Automation", "Security", "Infrastructure"] as const;
   const [active, setActive] = useState<(typeof cats)[number]>("All");
   const filtered = active === "All" ? projects : projects.filter((p) => p.category === active);
+
   return (
     <Section
       id="projects"
@@ -494,35 +519,267 @@ function Projects() {
   );
 }
 
-function Certs() {
+
+function ProjectGallery() {
+  const [selectedImage, setSelectedImage] = useState<{
+    src: string;
+    alt: string;
+  } | null>(null);
+
+  const galleries = [
+    {
+      title: "Automation",
+      images: [
+        { src: "/projects/automation-01.jpg", alt: "Workflow Automation" },
+        { src: "/projects/automation-02.jpg", alt: "AI Messenger Chatbot" },
+        { src: "/projects/automation-03.jpg", alt: "Business Process Automation" },
+        { src: "/projects/automation-04.jpg", alt: "Facebook Automation" },
+      ],
+    },
+    {
+      title: "IT Infrastructure",
+      images: [
+        { src: "/projects/infrastructure-01.jpg", alt: "Enterprise Server Infrastructure" },
+        { src: "/projects/infrastructure-02.jpg", alt: "Network Infrastructure" },
+        { src: "/projects/infrastructure-03.jpg", alt: "Wireless Network Deployment" },
+        { src: "/projects/infrastructure-04.jpg", alt: "Network Operations" },
+      ],
+    },
+    {
+      title: "Cybersecurity",
+      images: [
+        { src: "/projects/security-01.jpg", alt: "Sophos Firewall Deployment" },
+        { src: "/projects/security-02.jpg", alt: "Firewall Security Management" },
+        { src: "/projects/security-03.jpg", alt: "Secure VPN Connectivity" },
+        { src: "/projects/security-04.jpg", alt: "Enterprise Network Security" },
+      ],
+    },
+  ];
+
   return (
-    <Section id="certs" eyebrow="Certifications" title="Verified and continuously trained.">
-      <div className="grid gap-4 md:grid-cols-3">
-        {certifications.map((c, i) => {
-          const Icon = iconMap[c.icon];
-          return (
+    <>
+      <Section
+        id="gallery"
+        eyebrow="Project Gallery"
+        title="A closer look at my work."
+        subtitle="Selected snapshots of automation solutions, enterprise infrastructure, and cybersecurity implementations."
+      >
+        <div className="space-y-12">
+          {galleries.map((gallery, i) => (
             <motion.div
-              key={c.name}
+              key={gallery.title}
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.5, delay: i * 0.08 }}
-              className="glass group flex items-start gap-4 rounded-2xl p-5 transition-all hover:border-primary/30"
             >
-              <div className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-primary/10 ring-1 ring-primary/20 text-primary transition-transform group-hover:scale-110">
-                <Icon className="h-5.5 w-5.5" />
-              </div>
-              <div className="min-w-0">
-                <div className="text-xs uppercase tracking-widest text-muted-foreground">{c.issuer}</div>
-                <div className="mt-1 font-medium leading-snug">{c.name}</div>
+              <h3 className="mb-5 font-display text-xl font-semibold">
+                {gallery.title}
+              </h3>
+
+              <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
+                {gallery.images.map((image) => (
+                  <button
+                    key={image.src}
+                    type="button"
+                    onClick={() => setSelectedImage(image)}
+                    aria-label={`View ${image.alt}`}
+                    className="group overflow-hidden rounded-2xl border border-white/10 bg-white/5 text-left focus:outline-none focus:ring-2 focus:ring-primary"
+                  >
+                    <div className="aspect-[4/3] overflow-hidden">
+                      <img
+                        src={image.src}
+                        alt={image.alt}
+                        loading="lazy"
+                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                    </div>
+                  </button>
+                ))}
               </div>
             </motion.div>
-          );
-        })}
-      </div>
-    </Section>
+          ))}
+        </div>
+      </Section>
+
+      {selectedImage && (
+        <div
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 p-4 backdrop-blur-sm"
+          onClick={() => setSelectedImage(null)}
+        >
+          <button
+            type="button"
+            onClick={() => setSelectedImage(null)}
+            aria-label="Close image"
+            className="absolute right-5 top-5 z-10 rounded-full bg-white/10 p-3 text-white transition hover:bg-white/20"
+          >
+            <X size={24} />
+          </button>
+
+          <img
+            src={selectedImage.src}
+            alt={selectedImage.alt}
+            onClick={(e) => e.stopPropagation()}
+            className="max-h-[85vh] max-w-full rounded-xl object-contain shadow-2xl"
+          />
+
+          <p className="absolute bottom-5 left-0 right-0 text-center text-sm text-white/80">
+            {selectedImage.alt}
+          </p>
+        </div>
+      )}
+    </>
   );
 }
+
+
+
+function Certs() {
+  const [selectedCertificate, setSelectedCertificate] = useState<{
+    src: string;
+    name: string;
+  } | null>(null);
+
+  const certificateGroups = [
+    {
+      title: "Professional Certifications",
+      certificates: [
+        {
+          name: "Google Cybersecurity Professional Certificate",
+          issuer: "Google",
+          icon: "Award",
+          image: "/certificates/google-cybersecurity.jpg",
+        },
+        {
+          name: "Sophos Next Generation Firewall Training",
+          issuer: "Sophos",
+          icon: "ShieldCheck",
+          image: "/certificates/sophos-training.jpg",
+        },
+        {
+          name: "Symantec Cyber Resilience Together",
+          issuer: "Symantec",
+          icon: "BadgeCheck",
+          image: "/certificates/symantec-certificate.jpg",
+        },
+      ],
+    },
+    {
+      title: "Technical Courses & Training",
+      certificates: [
+        {
+          name: "Adobe Photoshop CC",
+          issuer: "Udemy",
+          icon: "Award",
+          image: "/certificates/udemy-photoshop.jpg",
+        },
+        {
+          name: "Complete HTML, JavaScript & CSS",
+          issuer: "Udemy",
+          icon: "Code2",
+          image: "/certificates/udemy-html-css-javascript.jpg",
+        },
+        {
+          name: "WordPress for Absolute Beginners",
+          issuer: "Udemy",
+          icon: "Code2",
+          image: "/certificates/udemy-wordpress.jpg",
+        },
+      ],
+    },
+  ];
+
+  return (
+    <>
+      <Section
+        id="certs"
+        eyebrow="Certifications"
+        title="Verified and continuously trained."
+      >
+        <div className="space-y-10">
+          {certificateGroups.map((group, groupIndex) => (
+            <div key={group.title}>
+              <h3 className="mb-5 font-display text-xl font-semibold">
+                {group.title}
+              </h3>
+
+              <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                {group.certificates.map((c, i) => {
+                  const Icon = iconMap[c.icon as keyof typeof iconMap];
+
+                  return (
+                    <motion.button
+                      type="button"
+                      key={c.name}
+                      onClick={() =>
+                        setSelectedCertificate({
+                          src: c.image,
+                          name: c.name,
+                        })
+                      }
+                      initial={{ opacity: 0, y: 24 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{
+                        duration: 0.5,
+                        delay: i * 0.08,
+                      }}
+                      className="glass group flex w-full items-start gap-4 rounded-2xl p-5 text-left transition-all hover:border-primary/30 focus:outline-none focus:ring-2 focus:ring-primary"
+                    >
+                      <div className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-primary/10 text-primary ring-1 ring-primary/20 transition-transform group-hover:scale-110">
+                        <Icon className="h-5.5 w-5.5" />
+                      </div>
+
+                      <div className="min-w-0">
+                        <div className="text-xs uppercase tracking-widest text-muted-foreground">
+                          {c.issuer}
+                        </div>
+                        <div className="mt-1 font-medium leading-snug">
+                          {c.name}
+                        </div>
+                        <div className="mt-2 text-xs text-primary">
+                          Click to view certificate ↗
+                        </div>
+                      </div>
+                    </motion.button>
+                  );
+                })}
+              </div>
+            </div>
+          ))}
+        </div>
+      </Section>
+
+      {selectedCertificate && (
+        <div
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 p-4 backdrop-blur-sm"
+          onClick={() => setSelectedCertificate(null)}
+        >
+          <button
+            type="button"
+            onClick={() => setSelectedCertificate(null)}
+            aria-label="Close certificate"
+            className="absolute right-5 top-5 z-10 rounded-full bg-white/10 p-3 text-white transition hover:bg-white/20"
+          >
+            <X size={24} />
+          </button>
+
+          <img
+            src={selectedCertificate.src}
+            alt={selectedCertificate.name}
+            onClick={(e) => e.stopPropagation()}
+            className="max-h-[85vh] max-w-full rounded-xl object-contain shadow-2xl"
+          />
+
+          <p className="absolute bottom-5 left-0 right-0 text-center text-sm text-white/80">
+            {selectedCertificate.name}
+          </p>
+        </div>
+      )}
+    </>
+  );
+}
+
 
 function Experience() {
   return (
@@ -710,7 +967,7 @@ function Footer() {
           <div>
             <div className="text-sm font-semibold">Joel Cagape</div>
             <div className="text-xs text-muted-foreground italic">
-              "Building secure, reliable and automated IT solutions."
+              "Building Intelligent Automation, Secure & Reliable IT Solutions."
             </div>
           </div>
         </div>
@@ -735,12 +992,14 @@ function Footer() {
 
 function FloatingActions() {
   const [show, setShow] = useState(false);
+
   useEffect(() => {
     const on = () => setShow(window.scrollY > 500);
     on();
     window.addEventListener("scroll", on);
     return () => window.removeEventListener("scroll", on);
   }, []);
+
   return (
     <div className="fixed bottom-5 right-5 z-40 flex flex-col items-end gap-3">
       {show && (
@@ -769,6 +1028,7 @@ function FloatingActions() {
 function ScrollProgress() {
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, { stiffness: 120, damping: 20 });
+
   return (
     <motion.div
       style={{ scaleX }}
@@ -779,6 +1039,7 @@ function ScrollProgress() {
 
 function Page() {
   const [loaded, setLoaded] = useState(false);
+
   useEffect(() => {
     const t = setTimeout(() => setLoaded(true), 500);
     return () => clearTimeout(t);
@@ -800,6 +1061,7 @@ function Page() {
           </div>
         </div>
       )}
+
       <ScrollProgress />
       <Nav />
       <main>
@@ -808,6 +1070,7 @@ function Page() {
         <Services />
         <Skills />
         <Projects />
+        <ProjectGallery />
         <Certs />
         <Experience />
         <Exploring />

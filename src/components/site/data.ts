@@ -1,3 +1,4 @@
+
 export const nav = [
   { label: "About", href: "#about" },
   { label: "Services", href: "#services" },
@@ -9,24 +10,24 @@ export const nav = [
 
 export const services = [
   {
-    title: "IT Infrastructure",
-    icon: "Server",
-    desc: "Design, deploy and maintain reliable enterprise IT infrastructure including networking, VPNs, firewalls, wireless systems, servers and business applications.",
-  },
-  {
-    title: "Cybersecurity",
-    icon: "Shield",
-    desc: "Protect business environments through secure firewall deployment, VPN implementation, network segmentation, endpoint security and cybersecurity best practices.",
-  },
-  {
     title: "Workflow Automation",
     icon: "Workflow",
     desc: "Automate repetitive business processes using n8n, Make.com, APIs, Google Workspace and AI to improve efficiency and reduce manual tasks.",
   },
   {
+    title: "IT Infrastructure",
+    icon: "Server",
+    desc: "Design, deploy and maintain reliable enterprise IT infrastructure including networking, VPNs, firewalls, wireless systems, servers and business applications.",
+  },
+  {
     title: "Technical Support",
     icon: "Headset",
     desc: "Provide reliable technical support, troubleshoot enterprise systems, resolve software and networking issues, and maintain business continuity.",
+  },
+  {
+    title: "Cybersecurity",
+    icon: "Shield",
+    desc: "Protect business environments through secure firewall deployment, VPN implementation, network segmentation, endpoint security and cybersecurity best practices.",
   },
 ] as const;
 
@@ -63,13 +64,7 @@ export const projects = [
     title: "Sales Inquiry Automation",
     category: "Automation",
     desc: "Designed and developed a landing page that automatically routes customer inquiries to the appropriate sales consultant, improving lead distribution and response efficiency.",
-    tech: ["HTML", "CSS", "GitHub", "Vercel", "Automation"],
-  },
-  {
-    title: "Facebook Messenger Lead Automation",
-    category: "Automation",
-    desc: "Built an automated lead capture workflow integrating Meta Messenger, Google Sheets, Make.com and n8n for centralized lead management.",
-    tech: ["Meta API", "Make.com", "n8n", "Google Sheets", "Webhooks"],
+    tech: ["n8n","HTML", "CSS", "Google Forms", "GitHub", "Vercel", "Automation"],
   },
   {
     title: "CCTV Request Automation",
@@ -84,10 +79,47 @@ export const projects = [
     tech: ["Google APIs", "OAuth", "REST API", "JSON"],
   },
   {
+    title: "Automated Accounts Receivable & Payment Follow-Up System",
+    category: "Automation",
+    desc: "An automated accounts receivable workflow designed to organize outstanding payments and streamline payment reminders and follow-up activities.",
+    tech: ["n8n", "Google Sheets", "Workflow Automation"],
+  },
+  {
+    title: "AutoReply PH – Messenger Chatbot",
+    category: "Automation",
+    desc: "Developed an AI-powered Messenger chatbot that handles customer FAQs, captures inquiries and contact details, supports follow-ups, and notifies businesses when human assistance is needed.",
+    tech: ["n8n", "AI", "Facebook Messenger", "Google Sheets", "Telegram"],
+  },
+  {
+    title: "Dental Automation – Inquiries & Booking",
+    category: "Automation",
+    desc: "An automation solution designed to handle dental clinic inquiries, collect patient details, and streamline appointment booking requests.",
+    tech: ["n8n", "Workflow Automation", "Webhooks"],
+  },
+  {
+    title: "Facebook Automation",
+    category: "Automation",
+    desc: "A Facebook-focused automation project designed to streamline repetitive social media tasks and reduce manual handling.",
+    tech: ["n8n", "Facebook", "Workflow Automation"],
+  },
+  {
+    title: "IT Ticketing System",
+    category: "Automation",
+    desc: "An automated IT ticketing system built with Make.com to streamline service requests, ticket tracking, technician assignments, and status notifications.",
+    tech: ["n8n", "make.com", "Workflow Automation"],
+  },
+
+  {
     title: "Sophos Firewall Deployment",
     category: "Security",
     desc: "Configured Sophos XGS firewalls including VPN connectivity, VLAN segmentation, routing, firewall policies and enterprise security.",
     tech: ["Sophos Firewall", "VPN", "VLAN", "Routing", "Security Policies"],
+  },
+  {
+    title: "Pfsense Firewall Deployment",
+    category: "Security",
+    desc: "Configured Pfsense firewalls including IPSEC connectivity, routing, and firewall policies.",
+    tech: ["Pfsense", "IPSEC", "Routing", "Security Policies"],
   },
   {
     title: "Enterprise Network Infrastructure",
@@ -104,6 +136,20 @@ export const certifications = [
 ] as const;
 
 export const experience = [
+  {
+    role: "Freelance AI Automation & GoHighLevel Specialist",
+    company: "Self-Employed / Freelance",
+    period: "2026 – Present",
+    bullets: [
+      "Design and develop AI-powered workflow automations using n8n and Make.com",
+      "Build automated lead management and customer inquiry systems",
+      "Configure GoHighLevel CRM workflows, pipelines, and automation",
+      "Integrate third-party applications using APIs, webhooks, and Google Workspace",
+      "Develop AI-powered chatbots and automated customer follow-up solutions",
+      "Help businesses streamline repetitive tasks and improve operational efficiency",
+    ],
+  },
+
   {
     role: "IT Supervisor",
     company: "Autohub Group Mindanao",
@@ -137,8 +183,8 @@ export const experience = [
 ] as const;
 
 export const exploring = [
-  { title: "HR Workflow Automation", icon: "Workflow" },
   { title: "Python Development", icon: "Code2" },
   { title: "Advanced AI Automation", icon: "Sparkles" },
   { title: "Cloud Technologies", icon: "Cloud" },
+  { title: "GoHighLevel (GHL)", icon: "Workflow" },
 ] as const;
